@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,19 +17,19 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstname;
-    private String middlename;
+    private String middlename = "";
     private String lastname;
     private String email;
 
-    @JsonIgnore
+//    @JsonIgnore
     private String password;
 
     @JsonIgnore
     private String token;
 
-    private Timestamp token_expires_at;
-    private Timestamp created_at;
-    private Timestamp updated_at;
+    private LocalDateTime token_expires_at;
+    private LocalDateTime created_at;
+    private LocalDateTime updated_at;
 
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
@@ -109,27 +110,27 @@ public class User {
         this.token = token;
     }
 
-    public Timestamp getToken_expires_at() {
+    public LocalDateTime getToken_expires_at() {
         return token_expires_at;
     }
 
-    public void setToken_expires_at(Timestamp token_expires_at) {
+    public void setToken_expires_at(LocalDateTime token_expires_at) {
         this.token_expires_at = token_expires_at;
     }
 
-    public Timestamp getCreated_at() {
+    public LocalDateTime getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(Timestamp created_at) {
+    public void setCreated_at(LocalDateTime created_at) {
         this.created_at = created_at;
     }
 
-    public Timestamp getUpdated_at() {
+    public LocalDateTime getUpdated_at() {
         return updated_at;
     }
 
-    public void setUpdated_at(Timestamp updated_at) {
+    public void setUpdated_at(LocalDateTime updated_at) {
         this.updated_at = updated_at;
     }
 

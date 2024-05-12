@@ -26,7 +26,7 @@ public class Job {
     private Timestamp updated_at;
 
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "company_id")
     @JsonIgnoreProperties("jobs")
     private Company company;

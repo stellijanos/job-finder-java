@@ -1,13 +1,11 @@
 package com.stellijanos.jobfinder.services;
 
-import com.stellijanos.jobfinder.models.Company;
 import com.stellijanos.jobfinder.models.Job;
 import com.stellijanos.jobfinder.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.Optional;
 
 @Service
 public class JobService {
@@ -37,7 +35,24 @@ public class JobService {
     }
 
 
+    public Job createJob(Job job) {
+        return jobRepository.save(job);
+    }
 
-//    private
+    public Job getJobById(Long id) {
+        return jobRepository.findById(id).orElseThrow(() -> new RuntimeException("Job not found"));
+    }
+
+    public Job updateJob(Long id, Job jobDetails) {
+        Job job = jobRepository.findById(id).orElseThrow(() -> new RuntimeException("Job not found"));
+        job.setTitle(jobDetails.getTitle());
+        job.setDescription(jobDetails.getDescription());
+        job.setSalary(jobDetails.getSalary());
+        return jobRepository.save(job);
+    }
+
+    public void deleteJob(Long id) {
+        jobRepository.deleteById(id);
+    }
 
 }

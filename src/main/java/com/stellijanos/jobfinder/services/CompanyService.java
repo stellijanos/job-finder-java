@@ -18,8 +18,26 @@ public class CompanyService {
         this.jobRepository = jobRepository;
     }
 
-
     public Iterable<Company> getAll() {
         return this.companyRepository.findAll();
+    }
+
+    public Company createCompany(Company company) {
+        return companyRepository.save(company);
+    }
+
+    public Company getCompanyById(Long id) {
+        return companyRepository.findById(id).orElseThrow(() -> new RuntimeException("Company not found"));
+    }
+
+    public Company updateCompany(Long id, Company companyDetails) {
+        Company company = companyRepository.findById(id).orElseThrow(() -> new RuntimeException("Company not found"));
+        company.setName(companyDetails.getName());
+        company.setEmail(companyDetails.getEmail());
+        return companyRepository.save(company);
+    }
+
+    public void deleteCompany(Long id) {
+        companyRepository.deleteById(id);
     }
 }
